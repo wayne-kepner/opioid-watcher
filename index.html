@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Opioid Watcher</title>
+  <link rel="stylesheet" href="styles.css?v=archive3">
+  <script defer src="data.js?v=archive3"></script>
+  <script defer src="app.js?v=archive3"></script>
+  <script defer src="archive.js?v=archive3"></script>
+  <script defer src="archive-ui.js?v=archive3"></script>
+</head>
+<body>
+  <div id="top">
+    <header class="site-header">
+      <div class="shell header-inner"><a class="brand" href="#top">Opioid Watcher</a><nav aria-label="Sections"><a href="#news">Current articles</a><a href="#archive">Five-year archive</a><a href="#health">CDC data</a><a href="#method">About the data</a></nav></div>
+    </header>
+
+    <main class="shell">
+      <section class="news-section" id="news" aria-labelledby="page-title">
+        <div class="page-heading">
+          <div class="issue-meta"><span id="refreshed">Loading snapshot…</span><span id="article-total"></span></div>
+          <h1 id="page-title">Opioid reporting</h1>
+          <p>Search articles from the past 14 days. Publishers may report the same event more than once.</p>
+        </div>
+
+        <div class="workbench">
+          <div class="controls">
+          <div class="search-line"><label for="search">Search headline or publisher</label><div class="search-control"><input id="search" type="search" placeholder="Search articles"><button id="save-search" type="button" title="Count new matches after the next refresh">Watch search</button></div><span id="search-status" class="field-status" role="status" aria-live="polite"></span></div>
+          <div class="filter-line">
+            <label>Topic <select id="topic-filter"><option>All topics</option><option>Overdose and supply</option><option>Treatment access</option><option>Harm reduction</option><option>Policy and courts</option><option>Research</option><option>Other opioid news</option></select></label>
+            <label>Review <select id="review-filter"><option value="all">All statuses</option><option value="Unreviewed">Unreviewed</option><option value="Relevant">Relevant</option><option value="Exclude">Exclude</option></select></label>
+            <label>Sort <select id="sort"><option value="newest">Newest first</option><option value="oldest">Oldest first</option><option value="source">Publisher A–Z</option></select></label>
+            <label class="check"><input id="focus-only" type="checkbox" checked> Likely public health reporting</label>
+            <label class="check"><input id="bookmarks-only" type="checkbox"> Saved only</label>
+          </div>
+          <p class="filter-note" id="focus-note"></p>
+          </div>
+          <div class="results-bar"><span id="results-count" role="status" aria-live="polite"></span><button class="button-outline" id="export-button" type="button">Export CSV</button><span id="saved-searches"></span></div>
+          <div class="article-list" id="article-list"></div>
+          <div class="list-footer"><button class="button-outline" id="more-button" type="button">Show more articles</button></div>
+        </div>
+        <div class="history-line"><div><strong>Retrieval history</strong><span id="history-description">History begins with the first refresh.</span></div><svg id="history-chart" role="img" aria-label="Retrieved media leads across daily snapshots" viewBox="0 0 260 65"></svg></div>
+      </section>
+
+      <section class="archive-section" id="archive" aria-labelledby="archive-title">
+        <div class="section-heading"><div><h2 id="archive-title">Five-year news archive</h2><p id="archive-range">Dated Google News searches across the last five years.</p></div><span class="archive-source">Google News RSS</span></div>
+        <div class="archive-overview"><div><span class="measure-label">Headlines that pass the public health screen</span><strong id="archive-focus-total">—</strong><span id="archive-total-note">Loading archive</span></div><p id="archive-limit">Monthly bars count retrieved headlines that pass a keyword screen. Publishers may cover one event many times.</p></div>
+        <div class="archive-chart-panel"><div class="archive-chart-heading"><strong>Monthly retrieval</strong><span id="archive-scale-label">Click a month to inspect its headlines</span></div><div class="archive-chart-scroll"><div id="archive-chart" class="archive-bars" role="group" aria-label="Monthly archived news retrieval"></div><div id="archive-axis" class="archive-axis" aria-hidden="true"></div></div><p id="archive-chart-note" class="chart-note"></p></div>
+        <div class="archive-workbench"><div class="archive-controls"><label for="archive-search">Search the archive<input id="archive-search" type="search" placeholder="Headline or publisher"></label><label for="archive-topic">Topic<select id="archive-topic"><option>All topics</option><option>Overdose and supply</option><option>Treatment access</option><option>Harm reduction</option><option>Policy and courts</option><option>Research</option><option>Other opioid news</option></select></label><label for="archive-review">Review<select id="archive-review"><option value="all">All statuses</option><option value="Unreviewed">Unreviewed</option><option value="Relevant">Relevant</option><option value="Exclude">Exclude</option></select></label><label class="check"><input id="archive-focus-only" type="checkbox" checked> Likely public health reporting</label><button id="archive-clear-month" class="button-outline" type="button" hidden>Show all months</button></div><div class="archive-results"><strong id="archive-results-count">Loading archive</strong><div><span id="archive-selected-period"></span><button id="archive-export" class="button-outline" type="button">Export matching CSV</button></div></div><div id="archive-list" class="article-list"></div><div class="list-footer"><button class="button-outline" id="archive-more" type="button" hidden>Show more articles</button></div></div>
+      </section>
+
+      <section class="health-section" id="health" aria-labelledby="health-title">
+        <div class="section-heading"><div><h2 id="health-title">CDC mortality</h2><p>U.S. deaths involving any opioid, recorded by place of occurrence.</p></div><a class="source-link" href="https://www.cdc.gov/nchs/nvss/vsrr/drug-overdose-data.htm" target="_blank" rel="noopener noreferrer">CDC methods</a></div>
+        <div class="health-summary"><div><span class="measure-label">Predicted provisional count</span><strong id="stat-deaths">—</strong><p id="stat-deaths-caption">The CDC counts deaths during a 12-month-ending period.</p></div><p>The CDC adjusts predicted counts for incomplete reporting. The U.S. total covers the 50 states and DC and excludes Puerto Rico.</p></div>
+        <div class="chart-panel"><div class="chart-header"><div><span class="chart-kicker">Last five years</span><strong id="chart-period">Loading range</strong><span id="chart-comparison"></span></div><div class="chart-key"><span class="key-line"></span> Deaths in the prior 12 months</div></div><div class="chart-wrap"><div class="chart-scale" aria-hidden="true"><span id="chart-scale-max"></span><span id="chart-scale-min"></span></div><svg id="mortality-chart" role="img" aria-label="CDC predicted provisional opioid-involved overdose deaths across five years of 12-month-ending periods" viewBox="0 0 900 330" preserveAspectRatio="none"></svg></div><div class="chart-footer" id="chart-years" aria-hidden="true"></div><p class="chart-note">Each point counts deaths during the preceding 12 months, so neighboring points overlap. Compare the same ending month across years. CDC may revise recent counts when it receives more records.</p><details class="data-table"><summary>Read the values in a table</summary><div class="table-scroll"><table><caption>CDC opioid-involved deaths by 12-month-ending period across the last five years</caption><thead><tr><th scope="col">Period ending</th><th scope="col">Predicted provisional</th><th scope="col">Reported provisional</th></tr></thead><tbody id="mortality-table-body"></tbody></table></div></details></div>
+      </section>
+
+      <section class="method-section" id="method" aria-labelledby="method-title"><h2 id="method-title">Sources and limits</h2><div class="method-grid"><p>The refresh scripts search Google News RSS and keep each result’s publication date, publisher, headline, and link. Dated searches fill the five-year archive. The script splits searches when Google returns 100 results, then marks months that still reach that limit. Headline keyword rules assign topics and flag likely public health reporting. You need to check relevance and confirm reported policy against a primary record.</p><p>The CDC series uses predicted provisional counts from the National Vital Statistics System. News retrieval counts describe the headlines this search returned when I ran it. Google indexing may change, and the counts cannot establish total coverage, opioid use, overdose incidence, or the number of distinct events.</p></div><div class="source-strip"><a href="https://stable.tobaccowatcher.org/about" target="_blank" rel="noopener noreferrer">Tobacco Watcher model</a><a href="https://data.cdc.gov/d/xkb8-kh2a" target="_blank" rel="noopener noreferrer">CDC dataset</a><a href="https://news.google.com/" target="_blank" rel="noopener noreferrer">Google News</a><a href="README.md">Local guide</a></div></section>
+    </main>
+    <footer><span>Opioid Watcher</span><span>Local research monitor</span></footer>
+  </div>
+</body>
+</html>
